@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="novel.admin.dao.UserMapper">
+
+    <!--    数据库表的字段名称和实体类的属性名称不一样，则不能自动封装数据
+解决方法：
+1;起别名：
+
+2:resultMap
+   主键：id
+   其他的：result
+-->
+    <resultMap id="BaseResultMAp" type="novel.admin.bean.User">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"></result>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="iswriter" property="isWriter" jdbcType="INTEGER"/>
+        <result column="isvip" property="isVip" jdbcType="INTEGER"/>
+        <result column="bookshelf" property="bookshelf" jdbcType="VARCHAR"/>
+        <result column="concern" property="concern" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--    根据ID查询用户信息-->
+    <select id="selectById" parameterType="int" resultType="novel.admin.bean.User" resultMap="BaseResultMAp">
+        select username,password,iswriter,isvip,bookshelf,concern from user where id=#{id}
+    </select>
+
+    <!--    查询所有用户信息-->
+    <select id="selectAll" resultType="novel.admin.bean.User" resultMap="BaseResultMAp">
+          select id,username,password,iswriter,isvip,bookshelf,concern from user;
+    </select>
+
+
+<!--    添加用户信息-->
+    <insert id="addUser" parameterType="novel.admin.bean.User">
+        insert into user(username, password,iswriter,isvip,bookshelf,concern) values (#{username},#{password},#{isWriter},#{isVip},#{bookshelf},#{concern})
+    </insert>
+
+<!--    修改用户信息-->
+    <update id="updateUser" parameterType="novel.admin.bean.User">
+        update user set username=#{username},password=#{password} where id=#{id}
+    </update>
+<!--    根据Id删除用户信息-->
+    <delete id="deleteById" parameterType="novel.admin.bean.User">
+        delete from user where id=#{id};
+    </delete>
+</mapper>

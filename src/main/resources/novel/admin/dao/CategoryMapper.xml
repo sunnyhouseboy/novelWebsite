@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="novel.admin.dao.CategoryMapper">
+    <resultMap id="BaseResultMap" type="novel.admin.bean.Category">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+        <result column="is_leaf" property="isLeaf" jdbcType="INTEGER"/>
+        <result column="path" property="path" jdbcType="VARCHAR"/>
+        <result column="sort_order" property="sortOrder" jdbcType="INTEGER"/>
+    </resultMap>
+
+<!--      添加小说分类-->
+    <insert id="insert" parameterType="Category">
+
+    </insert>
+<!--    更改小说分类-->
+    <update id="update" parameterType="Category">
+
+    </update>
+
+<!--   删除小说分类 -->
+    <delete id="delete" parameterType="Integer">
+        delete from category where id=#{id}
+    </delete>
+
+<!--    通过id进行查询-->
+    <select id="selectById" parameterType="Integer" resultType="Category">
+        select *from category where id=#{id}
+    </select>
+
+<!--    查询所有-->
+    <select id="selectAll" resultType="Category">
+        select *from category
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

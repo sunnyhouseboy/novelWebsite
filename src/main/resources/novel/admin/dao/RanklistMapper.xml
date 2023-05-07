@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="novel.admin.dao.RanklistMapper">
+<!--    根据第一个标签和score进行排序-->
+<!--    SUBSTRING_INDEX(label,',',1) AS first_label: 添加一个名为 first_label 的列，该列的值是 label 列中以逗号为分隔符的第一个子串-->
+<!--    WHERE label like concat(#{label},',%'): 添加一个过滤条件，要求 label 列的值以给定参数 label 开头，后面紧跟一个逗号。可以使用占位符 #{label} 来代替实际的参数值-->
+    <select id="selectRankListByFirstLabelAndScore" parameterType="Map" resultType="novel.admin.bean.Ranklist">
+        SELECT *,SUBSTRING_INDEX(label,',',1) AS first_label from tb_book where label like concat(#{label},',%') order by score desc limit #{limit};
+    </select>
+<!--根据第一个标签和readnum进行排序-->
+    <select id="selectRankListByFirstLabelAndReadNum" parameterType="Map" resultType="novel.admin.bean.Ranklist">
+        SELECT *,SUBSTRING_INDEX(label,',',1) AS first_label from tb_book where label like concat(#{label},',%') order by readNum desc limit #{limit};
+    </select>
+
+<!--    根据第一个标签和collectNum进行排序-->
+    <select id="selectRankListByFirstLabelAndCollectNum" parameterType="Map" resultType="novel.admin.bean.Ranklist">
+        SELECT *,SUBSTRING_INDEX(label,',',1) AS first_label from tb_book where label like concat(#{label},',%') order by collectNum desc limit #{limit};
+    </select>
+
+<!--    根据第一个标签和recommendNum-->
+    <select id="selectRankListByFirstLabelAndRecommendNum" parameterType="Map" resultType="novel.admin.bean.Ranklist">
+        SELECT *,SUBSTRING_INDEX(label,',',1) AS first_label from tb_book where label like concat(#{label},',%') order by recommendNum desc limit #{limit};
+    </select>
+
+
+</mapper>

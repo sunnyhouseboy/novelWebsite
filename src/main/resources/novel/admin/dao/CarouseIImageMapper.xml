@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="novel.admin.dao.CarouselImageMapper">
+ 
+    <resultMap id="BaseResultMap" type="novel.admin.bean.CarouselImage">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="image_name" property="imageName" jdbcType="VARCHAR"/>
+        <result column="image_path" property="imagePath" jdbcType="VARCHAR"/>
+        <result column="image_description" property="imageDescription" jdbcType="VARCHAR"/>
+        <result column="image_order" property="imageOrder" jdbcType="INTEGER"/>
+        <result column="image_status" property="imageStatus" jdbcType="INTEGER"/>
+    </resultMap>
+
+<!--    // 根据id查询轮播图-->
+    <select id="selectById" resultMap="BaseResultMap">
+        select * from carousel_image where id=#{id}
+    </select>
+
+
+<!--    //查询所有轮播图-->
+    <select id="selectAll" resultMap="BaseResultMap">
+        select *from carousel_image
+    </select>
+
+<!--    //插入一条轮播图-->
+    <insert id="insert">
+        insert into carousel_image(image_name,image_path,image_description,image_order,image_status) values(#{imageName},#{imagePath},#{imageDescription},#{imageOrder},#{imageStatus})
+    </insert>
+
+
+<!--    //更新一条轮播图-->
+    <update id="update">
+        update carousel_image
+        <set>
+            <if test="imageName!=null and imageName!=''">
+                image_name=#{imageName},
+            </if>
+            <if test="imagePath!=null and imagePath!=''">
+                image_path=#{imagePath},
+            </if>
+            <if test="imageDescription!=null and imageDescription!=''">
+                image_description=#{imageDescription},
+            </if>
+            <if test="imageOrder!=null">
+                image_order=#{imageOrder},
+            </if>
+            <if test="image_status!=null">
+
+            </if>
+        </set>
+        where
+        id=#{id};
+    </update>
+
+
+<!--    //删除一条轮播图记录-->
+    <delete id="delete">
+        delete from carousel_image where id=#{id}
+    </delete>
+
+</mapper>
